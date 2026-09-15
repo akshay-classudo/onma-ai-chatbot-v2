@@ -1,0 +1,23 @@
+[Unit]
+Description=ONMA scout Chatbot (Django)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/chatbot_django
+ExecStart=/path/to/chatbot_django/deploy/run_gunicorn.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+# Install:
+#   sudo cp deploy/onma-chatbot.service /etc/systemd/system/
+#   sudo chmod +x deploy/run_gunicorn.sh
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now onma-chatbot
+#   sudo systemctl status onma-chatbot
+#   journalctl -u onma-chatbot -f      # tail logs

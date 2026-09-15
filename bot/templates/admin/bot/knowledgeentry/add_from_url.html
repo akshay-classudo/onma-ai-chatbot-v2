@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<nav aria-label="{% translate 'Breadcrumbs' %}">
+  <ol class="breadcrumbs">
+    <li><a href="{% url 'admin:index' %}">{% translate 'Home' %}</a></li>
+    <li><a href="{% url 'admin:bot_knowledgeentry_changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a></li>
+    <li aria-current="page">{{ title }}</li>
+  </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <p>
+    Fetches the page, strips nav/footer/boilerplate (same extraction as <code>manage.py crawl_site</code>),
+    and saves it as a Knowledge entry. Pages under 150 characters of real content are rejected —
+    that usually means the page renders its real content via JavaScript, which this doesn't execute.
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    <fieldset class="module aligned">
+      {% for field in form %}
+        <div class="form-row field-{{ field.name }}">
+          {{ field.errors }}
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}<div class="help">{{ field.help_text }}</div>{% endif %}
+        </div>
+      {% endfor %}
+    </fieldset>
+    <div class="submit-row">
+      <input type="submit" value="Crawl &amp; save" class="default">
+    </div>
+  </form>
+</div>
+{% endblock %}

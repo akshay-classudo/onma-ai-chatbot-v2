@@ -1,0 +1,48 @@
+/* ONMA scout admin branding — recolors Django admin's CSS custom properties
+   to match the widget's blue (see widget.css --onma-primary) instead of
+   Django's default teal. Overrides both light and dark themes. */
+
+:root,
+html[data-theme="light"] {
+  --primary: #0b5fff;
+  --secondary: #0a4fd1;
+  --accent: #ff8a3d;
+  --header-bg: var(--secondary);
+  --header-branding-color: #fff;
+  --link-fg: #0b5fff;
+  --link-hover-color: #0a4fd1;
+  --link-selected-fg: #0a4fd1;
+  --button-bg: var(--secondary);
+  --button-hover-bg: #08379e;
+  --default-button-bg: #08379e;
+  --default-button-hover-bg: var(--secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --primary: #0a4fd1;
+    --link-fg: #6d9fff;
+    --link-hover-color: #a9c6ff;
+  }
+}
+
+html[data-theme="dark"] {
+  --primary: #0a4fd1;
+  --link-fg: #6d9fff;
+  --link-hover-color: #a9c6ff;
+}
+
+.onma-admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.onma-admin-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 2px;
+  object-fit: contain;
+}
