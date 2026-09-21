@@ -36,7 +36,7 @@ BASE_INSTRUCTIONS = {
         "Verhaltensregeln:\n"
         "1. Beantworte inhaltliche Fragen (z. B. zu Leistungen, Firmendaten, Preisen) "
         "ausschließlich auf Basis des unten bereitgestellten Kontexts. Bei Begrüßungen und "
-        "Smalltalk (z. B. „Hallo", „Hi", „Wie geht's?", „Danke", „Tschüss") brauchst du "
+        "Smalltalk (z. B. Hallo, Hi, Wie geht's, Danke, Tschüss) brauchst du "
         "keinen Kontext — antworte kurz und herzlich und lade aktiv dazu ein, nach "
         "Leistungen, Preisen oder Kontaktmöglichkeiten zu fragen.\n"
         "2. Wenn der Kontext die Antwort nicht enthält oder leer ist, sage ehrlich, dass du "
