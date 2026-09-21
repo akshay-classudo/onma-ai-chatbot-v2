@@ -1,77 +1,97 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONMA scout — Django V2 Widget Demo</title>
-<style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    margin: 0;
-    padding: 40px 24px;
-    background: #f8fafc;
-    color: #1a1d29;
-  }
-  .demo-wrap {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  h1 { font-size: 22px; }
-  .demo-consent-bar {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    background: #1a1d29;
-    color: #fff;
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    font-size: 14px;
-    z-index: 1000000;
-  }
-  .demo-consent-bar button {
-    background: #0b5fff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-  code { background: #eef1f7; padding: 2px 6px; border-radius: 4px; }
-</style>
-</head>
-<body>
-  <div class="demo-wrap">
-    <h1>ONMA scout Chatbot — V2 (Django) Widget Demo</h1>
-    <p>Same widget UI as V1, now backed by Django. Admin panel for managing
-      knowledge, sessions, chat logs and leads lives at
-      <a href="/admin/">/admin/</a>.</p>
-    <p>The chat will not call the API until the cookie-consent bar below is
-      accepted — this mirrors the real compliance requirement.</p>
-    <p>Backend endpoints: <code>/api/session/</code> and <code>/api/chat/</code>.</p>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ONMA scout — Django V2 Widget Demo</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+          sans-serif;
+        margin: 0;
+        padding: 40px 24px;
+        background: #f8fafc;
+        color: #1a1d29;
+      }
+      .demo-wrap {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      .demo-consent-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #1a1d29;
+        color: #fff;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 14px;
+        z-index: 1000000;
+      }
+      .demo-consent-bar button {
+        background: #0b5fff;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      code {
+        background: #eef1f7;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-wrap">
+      <h1>ONMA scout Chatbot — V2 (Django) Widget Demo</h1>
+      <p>
+        Same widget UI as V1, now backed by Django. Admin panel for managing
+        knowledge, sessions, chat logs and leads lives at
+        <a href="/admin/">/admin/</a>.
+      </p>
+      <p>
+        The chat will not call the API until the cookie-consent bar below is
+        accepted — this mirrors the real compliance requirement.
+      </p>
+      <p>
+        Backend endpoints: <code>/api/session/</code> and
+        <code>/api/chat/</code>.
+      </p>
+    </div>
 
-  <div class="demo-consent-bar" id="demo-consent-bar">
-    <span>Diese Website verwendet Cookies, um Ihnen den bestmöglichen Service zu gewährleisten.</span>
-    <button id="demo-consent-accept">Akzeptieren</button>
-  </div>
+    <div class="demo-consent-bar" id="demo-consent-bar">
+      <span
+        >Diese Website verwendet Cookies, um Ihnen den bestmöglichen Service zu
+        gewährleisten.</span
+      >
+      <button id="demo-consent-accept">Akzeptieren</button>
+    </div>
 
-  <link rel="stylesheet" href="{% static 'bot/widget.css' %}">
-  <script src="{% static 'bot/widget.js' %}"></script>
-  <script>
-    document.getElementById('demo-consent-accept').addEventListener('click', function () {
-      try { localStorage.setItem('cookie_consent', 'accepted'); } catch (e) {}
-      document.getElementById('demo-consent-bar').remove();
-      document.dispatchEvent(new Event('onma:consentAccepted'));
-    });
+    <link rel="stylesheet" href="{% static 'bot/widget.css' %}" />
+    <script src="{% static 'bot/widget.js' %}"></script>
+    <script>
+      document.getElementById('demo-consent-accept').addEventListener('click', function () {
+        try { localStorage.setItem('cookie_consent', 'accepted'); } catch (e) {}
+        document.getElementById('demo-consent-bar').remove();
+        document.dispatchEvent(new Event('onma:consentAccepted'));
+      });
 
-    ONMAChat.init({
-      {% if turnstile_site_key %}turnstileSiteKey: '{{ turnstile_site_key|escapejs }}'{% endif %}
-    });
-  </script>
-</body>
+      ONMAChat.init({
+        {% if turnstile_site_key %}turnstileSiteKey: '{{ turnstile_site_key|escapejs }}'{% endif %}
+      });
+    </script>
+  </body>
 </html>
